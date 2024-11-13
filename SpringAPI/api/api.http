@@ -1,0 +1,34 @@
+### Find by ID that doesn't exist
+GET http://localhost:8080/api/user/55
+
+### Find by ID
+GET http://localhost:8080/api/user/1
+
+### Find all
+GET http://localhost:8080/api/user
+
+### Create a new User
+POST http://localhost:8080/api/user
+Content-Type: application/json
+
+{
+  "id": 2,
+  "name": "Ray",
+  "age": 21,
+  "email": "ray@mail.org"
+}
+
+### Update an existing User
+PUT http://localhost:8080/api/user/2
+Content-Type: application/json
+
+{
+    "id": 2,
+    "name": "Stanley",
+    "age": 44,
+    "email": "stanley@mail.org"
+}
+
+### Delete a User
+DELETE http://localhost:8080/api/user/2
+
