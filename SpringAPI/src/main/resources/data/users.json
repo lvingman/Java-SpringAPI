@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Marth",
+      "age": 21,
+      "email": "marth@game.com"
+    },
+    {
+      "id": 2,
+      "name": "Pluto",
+      "age": 53,
+      "email": "pluto@company.com"
+    },
+    {
+      "id": 3,
+      "name": "Calm",
+      "age": 43,
+      "email": "calm@e.com"
+    }
+  ]
+}

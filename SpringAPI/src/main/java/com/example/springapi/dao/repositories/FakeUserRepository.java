@@ -1,4 +1,4 @@
-package com.example.springapi.repositories;
+package com.example.springapi.dao.repositories;
 
 import com.example.springapi.api.models.User;
 import jakarta.annotation.PostConstruct;

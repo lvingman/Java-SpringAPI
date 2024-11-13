@@ -1,15 +1,12 @@
-package com.example.springapi.repositories;
+package com.example.springapi.dao.repositories;
 
 import com.example.springapi.api.models.User;
-import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,12 +23,12 @@ public class UserRepository {
     }
 
     public Optional<List<User>> findAll() {
-        List<User> users = jdbcClient.sql("SELECT * FROM `User`").query(User.class).list();
+        List<User> users = jdbcClient.sql("SELECT * FROM \"User\"").query(User.class).list();
         return users.isEmpty() ? Optional.empty() : Optional.of(users);
     }
 
     public Optional<User> findById(Integer id){
-        return jdbcClient.sql("SELECT * FROM `User` WHERE Id = :id")
+        return jdbcClient.sql("SELECT * FROM \"User\" WHERE Id = :id")
                 .param("id", id)
                 .query(User.class)
                 .optional();
@@ -39,7 +36,7 @@ public class UserRepository {
 
     public void create(User user) {
         var toCreate = jdbcClient.sql(
-                "INSERT INTO `User` (Id, `Name`, Age, Email)" +
+                "INSERT INTO \"User\" (Id, \"name\", Age, Email)" +
                 "VALUES (?,?,?,?)")
                 .params(user.getId(), user.getName(), user.getAge(), user.getEmail())
                 .update();
@@ -49,8 +46,8 @@ public class UserRepository {
 
     public void update(Integer id, User user) {
         var toUpdate = jdbcClient.sql(
-                "UPDATE `User` " +
-                        "SET `Name` = ?, " +
+                "UPDATE \"User\" " +
+                        "SET \"name\" = ?, " +
                         "Age = ?, " +
                         "Email = ? " +
                         "WHERE Id = ?"
@@ -61,13 +58,21 @@ public class UserRepository {
     }
 
     public void delete(Integer id) {
-        var toDelete = jdbcClient.sql("DELETE FROM `User` WHERE Id = :id")
+        var toDelete = jdbcClient.sql("DELETE FROM \"User\" WHERE Id = :id")
                 .param("id", id)
                 .update();
 
         Assert.state(toDelete == 1, "Failed to delete User: " + id);
     }
 
+    //Methods to generate data in the dB  more easily
+
+    public int count(){
+        return jdbcClient.sql("SELECT * FROM \"User\"").query().listOfRows().size();
+    }
+    public void saveAll(List<User> users) {
+        users.stream().forEach(this::create);
+    }
 
 
 

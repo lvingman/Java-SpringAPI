@@ -1,12 +1,10 @@
 package com.example.springapi.api.controllers;
 
 import com.example.springapi.api.models.User;
-import com.example.springapi.repositories.FakeUserRepository;
-import com.example.springapi.repositories.UserRepository;
+import com.example.springapi.dao.repositories.UserRepository;
 import com.example.springapi.services.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
